@@ -2897,19 +2897,6 @@
   "networks": {
     "5777": {
       "events": {
-        "0x57d7cd3d613cb45185d44c346567fae72fd484102a46de633282a2b5c10057cd": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "msgs",
-              "type": "string"
-            }
-          ],
-          "name": "Sucess",
-          "type": "event"
-        },
         "0x166b96a382dc3abc86ba052ca9c020cfd7022d2d3059e868918a3d20779e41cc": {
           "anonymous": false,
           "inputs": [
@@ -2925,12 +2912,12 @@
         }
       },
       "links": {},
-      "address": "0x2331aDD37e1Ae8dE4D1F347A2580F46dcAB5b644",
-      "transactionHash": "0x670ac2c2c57e5e8c54a38e30d828d78545aed15ca139914d3ce7656dc72f3de4"
+      "address": "0x00090fc1F77b86973FA36e2aAB676F722795Aa2e",
+      "transactionHash": "0x10d38af89fb7b87688eea2decc0527d6c33e65564f956c42527aec026c9d8dc0"
     }
   },
   "schemaVersion": "3.3.1",
-  "updatedAt": "2021-12-31T06:27:03.658Z",
+  "updatedAt": "2022-01-02T05:46:37.274Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
