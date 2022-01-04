@@ -13,7 +13,7 @@ const { TabPane } = Tabs;
 
 function App(){
 
-  const [contract, setContract] = useState()
+  const [contract, setContract] = useState(null)
   const [accounts, setAccounts] = useState()
 
   useEffect(()=>{ 
@@ -49,22 +49,30 @@ function App(){
 
   return (
     <div className="App">
-      <Tabs defaultActiveKey="1" style={{marginLeft: '80px', marginRight: '80px'}}>
       {
-      accounts==localStorage.getItem('owner') ?
-        <TabPane tab="Add Book" key="1">
-          <AddBook accounts={accounts} contract={contract}/>
-        </TabPane>
-      
-      :
-      <TabPane tab="Book Detail" key="2">
-        <BookDetail accounts={accounts} contract={contract}/>
-      </TabPane>
+        contract != null ? 
+        accounts==localStorage.getItem('owner') ?
+        <Tabs defaultActiveKey="1" style={{marginLeft: '80px', marginRight: '80px'}}>
+          <TabPane tab="Add Book" key="1">
+            <AddBook accounts={accounts} contract={contract}/>
+          </TabPane>
+          <TabPane tab="Book Detail" key="2">
+            <BookDetail accounts={accounts} contract={contract}/>
+          </TabPane>
+          <TabPane tab="ALL Book" key="3">
+            <AllBooksDetails accounts={accounts} contract={contract}/>
+          </TabPane>
+        </Tabs>
+        :
+        <Tabs defaultActiveKey="4" style={{marginLeft: '80px', marginRight: '80px'}}>
+          <TabPane tab="ALL Book" key="4">
+            <AllBooksDetails accounts={accounts} contract={contract}/>
+          </TabPane>
+        </Tabs>
+        :<>
+        Loading...
+        </>
       }
-      <TabPane tab="ALL Book" key="3">
-        <AllBooksDetails accounts={accounts} contract={contract}/>
-      </TabPane>
-      </Tabs>
     </div>
   );
 }
