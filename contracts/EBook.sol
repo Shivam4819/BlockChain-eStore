@@ -43,12 +43,19 @@ contract EBook{
 
     }
 
-    function updateBookStatus(uint _id, string memory _status, address payable reciver) payable public{
+    // function updateBookStatus(uint _id, string memory _status, address payable reciver) payable public{
+
+    //     Books storage book= books[_id];
+    //     book.status=_status;
+    //     reciver.transfer(10);
+
+    // }
+
+    function updateBookStatus(uint _id, string memory _status) payable public{
 
         Books storage book= books[_id];
         book.status=_status;
-        reciver.transfer(10);
-
+     
     }
 
 }
