@@ -1,62 +1,64 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.4.21 <0.7.0;
+pragma solidity ^0.8.4;
 pragma experimental ABIEncoderV2;  
 
-contract EBook{
+contract EBookShop{
 
-    struct Books{
-        uint id;
-        string bookName;
-        string status;
+    struct NewBook{
+        string name;
+        bool status;
+        uint256 price;
+        string author;
     }
-    address public owner;
     
-    constructor() public{
-        owner=msg.sender;
+    NewBook[] books;
+    address payable owner;
+    
+    constructor(){
+        owner=payable(msg.sender);
     }
 
-    Books[] books;
-    
     event Success(string msgs);
 
-    function addBook(uint _id, string memory _bookName) public{
-        // mainly used to restriction based on user
-        require(msg.sender==owner,"you are not owner");
+    function addBook(string memory _name, uint256 _price, string memory _author) public{
+        
+        require(msg.sender==owner,"your are not owner");
+        
+        NewBook memory newbook= NewBook({
+            name:_name,
+            price:_price,
+            status:false,
+            author:_author
+        });
 
-        books.push(Books(_id,_bookName,"not sold"));
-
-        // event is used to send msg to log which will be accessed by react
+        books.push(newbook);
         emit Success("Books inserted");        
     }
 
-    function getSpecificBook(uint _id) external view returns(Books memory){
-
-        Books storage book= books[_id];
-
-        return book;
-
+    function getSpecificBook(uint _id) external view returns(NewBook memory){
+    
+       return books[_id];
     }
 
-    function getAllBook() external view returns(Books[] memory){
+    function getAllBook() external view returns(NewBook[] memory){
 
         return books;
-
     }
 
-    // function updateBookStatus(uint _id, string memory _status, address payable reciver) payable public{
+    function buyBook(uint _id) payable public{
 
-    //     Books storage book= books[_id];
-    //     book.status=_status;
-    //     reciver.transfer(10);
-
-    // }
-
-    function updateBookStatus(uint _id, string memory _status) payable public{
-
-        Books storage book= books[_id];
-        book.status=_status;
-     
+        require(msg.sender!=owner,"owner can not buy book");
+        
+        NewBook storage book= books[_id];
+        require(msg.value==(book.price*(10**18)),"you send wrong amount");
+        book.status=true;
+        owner.transfer(msg.value);
+       
     }
 
+    function balanceOf() external view returns(uint) {
+        
+        return owner.balance;
+        
+    }
 }
-
