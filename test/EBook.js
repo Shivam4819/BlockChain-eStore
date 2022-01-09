@@ -1,12 +1,12 @@
-const EBook = artifacts.require("./EBook.sol");
+const EBook = artifacts.require("./EBookShop.sol");
 
-contract("EBook", accounts => {
+contract("EBookShop", accounts => {
 
   let EBookInstance;
 
   it("should add book by owner...", async () => {
     EBookInstance = await EBook.deployed();
-    const trans=await EBookInstance.addBook(1,'Book1', { from: accounts[0] });
+    const trans=await EBookInstance.addBook("book1",10,"author1",{from:accounts[0]});
     // console.log(trans.logs[0]);
     assert.equal(trans.logs[0].event,"Success");
   });
@@ -14,7 +14,7 @@ contract("EBook", accounts => {
   it("should add book by user...", async () => {
     try {
       EBookInstance = await EBook.deployed();
-      const trans = await EBookInstance.addBook(2,'Book1', { from: accounts[1] });
+      const trans = await EBookInstance.addBook('Book1',10,'author1', { from: accounts[1] });
     } catch (error) {
       assert.equal(error.reason,"you are not owner");
     }
