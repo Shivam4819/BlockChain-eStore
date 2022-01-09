@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Button, Card, Col, Row} from 'antd';
 import { ToastContainer, toast } from 'react-toastify';
+const {ethers} =require('ethers')
 
 export default function AllBooksDetails({accounts, contract}){
 
@@ -14,7 +15,9 @@ export default function AllBooksDetails({accounts, contract}){
         const bookDetails = async (values) => {
             notify();
             setTimeout( async () => {
-                const tx = await contract.methods.getAllBook().call({ from: accounts[0] });
+                const tx = await contract.methods.getAllBook().call({ 
+                    from: accounts[0]
+                 });
         
                 console.log("Result:", tx)
                 setProductInfo(tx)
@@ -26,13 +29,14 @@ export default function AllBooksDetails({accounts, contract}){
         bookDetails();
     },[])
 
-    async function buyBook(id){
+    async function buyBook(id,price){
         console.log("from buy",id);
-        const status='sold'
-        const tx = await contract.methods.updateBookStatus(
+        const tx = await contract.methods.buyBook(
             id,
-            status,
-          ).send({ from: accounts[0] });
+            
+            ).send({ from: accounts[0],
+                     value: ethers.utils.parseEther(price)
+            });
         console.log("transaction:", tx)
 }
     
@@ -43,27 +47,31 @@ export default function AllBooksDetails({accounts, contract}){
             <h2>Book Detail</h2> <br/><br/>
             <Row gutter={16}>{
 
-                productInfo.map(val=>{
+                productInfo.map((val,index)=>{
                     return(
                         <>
                             <Col span={8} >
                                 {
-                                  accounts==localStorage.getItem('owner')?
-                                  <Card size='small' title={val.bookName} style={{ width: 300 }}>
-                                    <p>{val.id}</p>
-                                    <p>{val.status}</p>
+                                  accounts[0].toLowerCase()==localStorage.getItem('owner')?
+                                  <Card size='small' title={val.name} style={{ width: 300 }}>
+                                    <p>{val.author}</p>
+                                    <p>{val.price}</p>
+                                   
                                 </Card>
                                 :
-                                val.status!='sold'?
-                                <Card size='small' title={val.bookName} style={{ width: 300 }}>
-                                    <p>{val.id}</p>
-                                    <p>{val.status}</p>
-                                        <p> <Button 
+                                val.status==false?
+                                
+                                <Card key={index} size='small' title={val.name} style={{ width: 300 }}>
+                                    <p>{val.author}</p>
+                                    <p>{val.price}</p>
+                                    <p> 
+                                        <Button 
                                             type="primary" 
                                             htmlType="submit" 
-                                            onClick={e=>{e.stopPropagation();buyBook(val.id)}}>Buy
-                                            </Button>
-                                         </p>
+                                            onClick={e=>{e.stopPropagation();buyBook(index,val.price)}}>
+                                                Buy
+                                        </Button>
+                                    </p>
                                     
                                 </Card>
                                 :<></>

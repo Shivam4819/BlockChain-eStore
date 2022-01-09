@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from "react";
-import EBookContact from "./contracts/EBook.json";
+import EBookContact from "./contracts/EBookShop.json";
 import getWeb3 from "./getWeb3";
 import AddBook from "./components/add_book";
 import BookDetail from "./components/book_details";
@@ -15,6 +15,7 @@ function App(){
 
   const [contract, setContract] = useState(null)
   const [accounts, setAccounts] = useState()
+  const [owner, setOwner] = useState()
 
   useEffect(()=>{ 
     async function connect(){
@@ -30,11 +31,12 @@ function App(){
         );
         // instance.address = ["0xfed5c6f50e57c6886149f47a4f02fdffbacfead8"]
         setAccounts(accounts);
+        setOwner(accounts[0].toLowerCase())
         setContract(instance);
 
-        const receipt= await instance.methods.owner.call().call({ from: accounts[0] });
-        console.log("yoo",receipt);
-        localStorage.setItem('owner',receipt)
+        // const receipt= await instance.methods.owner.call().call({ from: accounts[0] });
+        // console.log("yoo",receipt);
+        localStorage.setItem('owner','0x824ca52f2f102a5b6b0f57c60ff4a4a50faff8d2')
 
       } catch (error) {
           alert(
@@ -50,8 +52,9 @@ function App(){
   return (
     <div className="App">
       {
+        
         contract != null ? 
-        accounts==localStorage.getItem('owner') ?
+        owner==localStorage.getItem('owner') ?
         <Tabs defaultActiveKey="1" style={{marginLeft: '80px', marginRight: '80px'}}>
           <TabPane tab="Add Book" key="1">
             <AddBook accounts={accounts} contract={contract}/>

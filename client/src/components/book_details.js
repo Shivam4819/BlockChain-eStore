@@ -62,9 +62,10 @@ export default function BookDetail({accounts, contract}){
                     <Timeline.Item label="Book Detail:"><h3><u>Book details</u></h3></Timeline.Item>
                         { productInfo.length >0 ? 
                             <div>
-                                <Timeline.Item>Book Id: {productInfo["id"]}</Timeline.Item>
-                                <Timeline.Item>Book Name: {productInfo["bookName"]}</Timeline.Item>
-                                <Timeline.Item>Book Name: {productInfo["status"]}</Timeline.Item>
+                                <Timeline.Item>Book Name: {productInfo.name}</Timeline.Item>
+                                <Timeline.Item>Author Name: {productInfo.price}</Timeline.Item>
+                                <Timeline.Item>Book Price: {productInfo.price}</Timeline.Item>
+                                <Timeline.Item>Book Status: {String(productInfo.status)}</Timeline.Item>
                             </div> : null
                         }    
                 </Timeline>
