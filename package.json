@@ -1,0 +1,25 @@
+{
+  "name": "ebookshop",
+  "version": "1.0.0",
+  "description": "This is a blockchain based eStore where user can buy books from the store. The project is developed on etherium based blockchain.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "solc": "^0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shivam4819/BlockChain-eStore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shivam4819/BlockChain-eStore/issues"
+  },
+  "homepage": "https://github.com/Shivam4819/BlockChain-eStore#readme"
+}
