@@ -63,7 +63,7 @@ export default function BookDetail({accounts, contract}){
                         { productInfo.length >0 ? 
                             <div>
                                 <Timeline.Item>Book Name: {productInfo.name}</Timeline.Item>
-                                <Timeline.Item>Author Name: {productInfo.price}</Timeline.Item>
+                                <Timeline.Item>Author Name: {productInfo.author}</Timeline.Item>
                                 <Timeline.Item>Book Price: {productInfo.price}</Timeline.Item>
                                 <Timeline.Item>Book Status: {String(productInfo.status)}</Timeline.Item>
                             </div> : null
