@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Form, Input, Button} from 'antd';
 // import moment from "moment";
 import { ToastContainer, toast } from 'react-toastify';
+const {ethers} =require('ethers')
 
-export default function AddBook({accounts, contract}){
+export default function BuyToken({accounts, contract}){
 
     const toastId = React.useRef(null);
-    const [authorName, setAuthorName] = useState(null);
-    const [price, setPrice] = useState(null);
-    const [bookName, setBookName] = useState(null);
+    const [amount, setAmount] = useState(0);
    
     const infoToast = (msg) => toastId.current = toast.info(msg);
     const successToast = (msg) => toast.success(msg);
@@ -20,11 +19,11 @@ export default function AddBook({accounts, contract}){
 
         setTimeout(async() => {
             console.log(contract.methods);
-            const tx = await contract.methods.addBook(
-                bookName,
-                price,
-                authorName
-              ).send({ from: accounts[0] });
+            const tx = await contract.methods.buyToken()
+            .send({ from: accounts[0],
+                    value: ethers.utils.parseEther(amount)
+            });
+            // console.log(accounts)
             console.log("transaction:", tx)
 
             if(tx.status){
@@ -54,19 +53,14 @@ export default function AddBook({accounts, contract}){
             style={{marginLeft: '100px', marginRight: '100px', marginTop: '50px'}} 
         >
             
-
-            <Form.Item label="Book Name" name="bookname" rules={[{required: true,message: 'Please input book name!'}]}>
-                <Input type="text" placeholder="Enter book name" onChange={(e)=>setBookName(e.target.value)} />
+            <h2>1 ETH = 1EBT</h2>
+            <Form.Item label="Ether Amount" name="etherAmount" rules={[{required: true,message: 'Please input ether amount!'}]}>
+                <Input type="number" placeholder="Enter ether amount" onChange={(e)=>setAmount(e.target.value)} />
             </Form.Item>
-            <Form.Item label="Author Name" name="authorName" rules={[{required: true,message: 'Please input author name'}]}>
-                <Input type="text" placeholder="Enter author Name" onChange={(e)=>setAuthorName(e.target.value)}/>
-            </Form.Item>
-            <Form.Item label="Book Price" name="price" rules={[{required: true,message: 'Please input book price'}]}>
-                <Input type="number" placeholder="Enter Book Price" onChange={(e)=>setPrice(e.target.value)}/>
-            </Form.Item>
+            <h2>Total EBT: {amount}</h2>
             <Form.Item>
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    Buy EBT
                 </Button>
                 <ToastContainer/>
             </Form.Item>

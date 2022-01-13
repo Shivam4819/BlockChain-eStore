@@ -1,9 +1,7 @@
 import React, { useEffect,useState } from "react";
-import EBookContact from "./contracts/EBookShop.json";
+import EBookContact from "./contracts/EBookToken.json";
 import getWeb3 from "./getWeb3";
-import AddBook from "./components/add_book";
-import BookDetail from "./components/book_details";
-import AllBooksDetails from "./components/all_books";
+import BuyToken from "./components/buy_token";
 import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tabs } from 'antd';
@@ -51,31 +49,14 @@ function App(){
 
   return (
     <div className="App">
-      {
+      
         
-        contract != null ? 
-        owner==localStorage.getItem('owner') ?
         <Tabs defaultActiveKey="1" style={{marginLeft: '80px', marginRight: '80px'}}>
-          <TabPane tab="Add Book" key="1">
-            <AddBook accounts={accounts} contract={contract}/>
+          <TabPane tab="Buy Token" key="1">
+            <BuyToken accounts={accounts} contract={contract}/>
           </TabPane>
-          <TabPane tab="Book Detail" key="2">
-            <BookDetail accounts={accounts} contract={contract}/>
-          </TabPane>
-          <TabPane tab="ALL Book" key="3">
-            <AllBooksDetails accounts={accounts} contract={contract}/>
-          </TabPane>
-        </Tabs>
-        :
-        <Tabs defaultActiveKey="4" style={{marginLeft: '80px', marginRight: '80px'}}>
-          <TabPane tab="ALL Book" key="4">
-            <AllBooksDetails accounts={accounts} contract={contract}/>
-          </TabPane>
-        </Tabs>
-        :<>
-        Loading...
-        </>
-      }
+         </Tabs>
+        
     </div>
   );
 }
