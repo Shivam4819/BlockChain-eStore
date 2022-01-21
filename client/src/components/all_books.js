@@ -2,6 +2,8 @@ import React, { useState,useEffect } from 'react';
 import { Button, Card, Col, Row} from 'antd';
 import { ToastContainer, toast } from 'react-toastify';
 const {ethers} =require('ethers')
+const {moralis} = require('moralis');
+
 
 export default function AllBooksDetails({accounts, contract}){
 
@@ -33,8 +35,9 @@ export default function AllBooksDetails({accounts, contract}){
         console.log("from buy",id);
         const tx = await contract.methods.buyBook(
             id,
-            
-            ).send({ from: accounts[0],
+            )
+            // .sendTransaction(txx);
+            .send({ from: accounts[0],
                      value: ethers.utils.parseEther(price)
             });
         console.log("transaction:", tx)

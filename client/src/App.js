@@ -1,9 +1,11 @@
 import React, { useEffect,useState } from "react";
-import EBookContact from "./contracts/EBookShop.json";
+import EBookContract from "./contracts/EBookShop.json";
+import EBookToken from "./contracts/EBookToken.json";
 import getWeb3 from "./getWeb3";
 import AddBook from "./components/add_book";
 import BookDetail from "./components/book_details";
 import AllBooksDetails from "./components/all_books";
+import BuyToken from "./components/buy_token";
 import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tabs } from 'antd';
@@ -14,6 +16,7 @@ const { TabPane } = Tabs;
 function App(){
 
   const [contract, setContract] = useState(null)
+  const [contract1, setContract1] = useState(null)
   const [accounts, setAccounts] = useState()
   const [owner, setOwner] = useState()
 
@@ -24,15 +27,23 @@ function App(){
         const accounts = await web3.eth.getAccounts();
         console.log(accounts);
         const networkId = await web3.eth.net.getId();
-        const deployedNetwork = await EBookContact.networks[networkId];
+        const deployedNetwork = await EBookContract.networks[networkId];
+        const deployedToken = await EBookToken.networks[networkId];
+        
         const instance = new web3.eth.Contract(
-            EBookContact.abi,
+            EBookContract.abi,
             deployedNetwork && deployedNetwork.address,
+           
         );
+        const instance1 = new web3.eth.Contract(
+          EBookToken.abi,
+          deployedToken && deployedToken.address
+      );
         // instance.address = ["0xfed5c6f50e57c6886149f47a4f02fdffbacfead8"]
         setAccounts(accounts);
         setOwner(accounts[0].toLowerCase())
         setContract(instance);
+        setContract1(instance1);
 
         // const receipt= await instance.methods.owner.call().call({ from: accounts[0] });
         // console.log("yoo",receipt);
@@ -70,6 +81,9 @@ function App(){
         <Tabs defaultActiveKey="4" style={{marginLeft: '80px', marginRight: '80px'}}>
           <TabPane tab="ALL Book" key="4">
             <AllBooksDetails accounts={accounts} contract={contract}/>
+          </TabPane>
+          <TabPane tab="Buy Token" key="5">
+            <BuyToken accounts={accounts} contract={contract1}/>
           </TabPane>
         </Tabs>
         :<>
