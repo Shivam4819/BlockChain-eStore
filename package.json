@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "solc": "^0.8.0"
+    "solc": "^0.8.0",
+    "@openzeppelin/contracts": "^4.4.2"
   },
   "repository": {
     "type": "git",
