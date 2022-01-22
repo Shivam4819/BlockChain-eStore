@@ -15,6 +15,8 @@ This is a blockchain based eStore where user can buy books from the store. The p
 
 ## Quick Start
 
+A. Contract
+
 1. Open truffle develop console:
 
         truffle develop
@@ -30,3 +32,18 @@ This is a blockchain based eStore where user can buy books from the store. The p
 4. Test contracts:
 
         truffle test
+
+B. React App
+
+1. Go to client 
+
+        cd client
+
+2. Install node modules
+
+        npm install
+
+3. Run file
+
+        npm start
+
