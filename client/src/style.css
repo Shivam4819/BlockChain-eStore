@@ -1,0 +1,49 @@
+#token-body{
+    height: 100vh;
+    overflow: auto;
+    width: 100%;
+}
+#top-nav {
+    height: 10%;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #d3d1d1;
+}
+#banner{
+    height: auto;
+    width: 100%;
+}
+#info-area{
+    height: auto;
+    padding-bottom: 10px;
+    width: 100%;
+    background-color: #f8f9fa;
+}
+#logo{
+    float: left;
+    width: 40%;
+    height: 100%;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 54px;
+}
+#buy-token{
+    float: right;
+    /* background-color: orange; */
+    width: 40%;
+    height: 100%;
+}
+#buy-btn{
+    margin-left: 50px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 45px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 22px;
+    background-color: #8247e5;
+    border: solid 1px #8247e5 !important;
+    color: #fff !important;
+    font-family: manrope;
+}

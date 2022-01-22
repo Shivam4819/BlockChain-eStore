@@ -1,9 +1,9 @@
 import React, { useEffect,useState } from "react";
 import EBookContact from "./contracts/EBookToken.json";
 import getWeb3 from "./getWeb3";
-import BuyToken from "./components/buy_token";
 import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
+import TokenInfo from "./components/token_info";
 import { Tabs } from 'antd';
 import "./App.css";
 
@@ -27,13 +27,10 @@ function App(){
             EBookContact.abi,
             deployedNetwork && deployedNetwork.address,
         );
-        // instance.address = ["0xfed5c6f50e57c6886149f47a4f02fdffbacfead8"]
         setAccounts(accounts);
         setOwner(accounts[0].toLowerCase())
         setContract(instance);
 
-        // const receipt= await instance.methods.owner.call().call({ from: accounts[0] });
-        // console.log("yoo",receipt);
         localStorage.setItem('owner','0x824ca52f2f102a5b6b0f57c60ff4a4a50faff8d2')
 
       } catch (error) {
@@ -49,14 +46,7 @@ function App(){
 
   return (
     <div className="App">
-      
-        
-        <Tabs defaultActiveKey="1" style={{marginLeft: '80px', marginRight: '80px'}}>
-          <TabPane tab="Buy Token" key="1">
-            <BuyToken accounts={accounts} contract={contract}/>
-          </TabPane>
-         </Tabs>
-        
+      <TokenInfo accounts={accounts} contract={contract}/>
     </div>
   );
 }
