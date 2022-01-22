@@ -13,7 +13,7 @@ contract EBookToken is ERC20{
     function buyToken()external payable{
          require(msg.sender!=admin,"owner can not buy token");
          require(msg.value>0,"amount can not be 0");
-        _transfer(admin,msg.sender,msg.value);
+         _transfer(admin,msg.sender,msg.value*10);
         // _transfer(msg.sender,admin,msg.value);
         admin.transfer(msg.value);
     }    
