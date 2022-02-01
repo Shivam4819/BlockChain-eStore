@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "solc": "^0.8.0",
-    "@openzeppelin/contracts": "^4.4.2"
+    "@openzeppelin/contracts": "^4.4.2",
+    "@truffle/hdwallet-provider": "2.0.1"
   },
   "repository": {
     "type": "git",
