@@ -1,10 +1,7 @@
-var EBook = artifacts.require("./EBookShop.sol");
-var EBookToken = artifacts.require("./EBookToken.sol");
+var NFT = artifacts.require("./NFT.sol");
 
-module.exports = function(deployer) {
-  deployer.deploy(EBook);
-  deployer.deploy(EBookToken,10000000);
+module.exports = async function(deployer, _network, accounts) {
+  await deployer.deploy(NFT);
+  const nft= await NFT.deployed();
+  await nft.mint(accounts[0]);
 };
-// module.exports = function(deployer) {
-//   deployer.deploy(EBookToken,10000000);
-// };
