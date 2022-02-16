@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-node_modules/wrappy
+/node_modules/wrappy
 /.pnp
 .pnp.js
 

@@ -16,9 +16,9 @@ contract NFT is ERC721 {
     function mint(address recipient) public returns (uint256)
     {
         require(msg.sender==owner,'only owner can deploy');
-        currentTokenId.increment();
         uint256 newItemId = currentTokenId.current();
         _safeMint(recipient, newItemId);
+        currentTokenId.increment();
         return newItemId;
     }
     function _baseURI() internal view override returns (string memory) {
